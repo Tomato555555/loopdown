@@ -1,34 +1,45 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loopdown</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
 <style>
-  .wrap { padding: 1.5rem 1rem; max-width: 480px; margin: 0 auto; }
-  .section-label { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 6px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #f5f5f0; color: #1a1a1a; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+  .wrap { padding: 2rem 1.5rem; max-width: 480px; width: 100%; background: #fff; border-radius: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  h1 { font-size: 20px; font-weight: 500; margin-bottom: 1.5rem; color: #1a1a1a; }
+  .section-label { font-size: 13px; color: #666; margin-bottom: 6px; display: block; }
   .input-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
   .input-group { display: flex; flex-direction: column; }
-  .input-group input { text-align: center; font-size: 15px; }
-  .display-area { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 2rem 1rem; text-align: center; margin-bottom: 1.25rem; border: 0.5px solid var(--color-border-tertiary); }
-  .phase-label { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 8px; letter-spacing: 0.05em; }
-  .big-number { font-size: 72px; font-weight: 500; color: var(--color-text-primary); line-height: 1; margin-bottom: 12px; font-variant-numeric: tabular-nums; }
+  .input-group input { text-align: center; font-size: 15px; padding: 8px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; color: #1a1a1a; outline: none; }
+  .input-group input:focus { border-color: #378ADD; }
+  .display-area { background: #f5f5f0; border-radius: 12px; padding: 2rem 1rem; text-align: center; margin-bottom: 1.25rem; border: 1px solid #e8e8e0; }
+  .phase-label { font-size: 13px; color: #666; margin-bottom: 8px; letter-spacing: 0.05em; }
+  .big-number { font-size: 72px; font-weight: 500; color: #1a1a1a; line-height: 1; margin-bottom: 12px; font-variant-numeric: tabular-nums; }
   .big-number.break-color { color: #1D9E75; }
   .big-number.done-color { color: #639922; }
-  .status-row { display: flex; justify-content: center; gap: 24px; font-size: 13px; color: var(--color-text-secondary); }
-  .status-val { font-weight: 500; color: var(--color-text-primary); }
-  .progress-bar-wrap { height: 6px; background: var(--color-background-primary); border-radius: 99px; margin: 1rem 0 1.5rem; overflow: hidden; border: 0.5px solid var(--color-border-tertiary); }
+  .status-row { display: flex; justify-content: center; gap: 24px; font-size: 13px; color: #666; }
+  .status-val { font-weight: 500; color: #1a1a1a; }
+  .progress-bar-wrap { height: 6px; background: #eee; border-radius: 99px; margin: 1rem 0 1.5rem; overflow: hidden; }
   .progress-bar { height: 100%; border-radius: 99px; background: #378ADD; transition: width 0.25s linear; }
   .progress-bar.break-bar { background: #1D9E75; }
   .btn-row { display: flex; gap: 10px; }
-  .btn-row button { flex: 1; padding: 10px; font-size: 14px; border-radius: var(--border-radius-md); cursor: pointer; border: 0.5px solid var(--color-border-secondary); background: transparent; color: var(--color-text-primary); transition: background 0.15s; }
-  .btn-row button:hover { background: var(--color-background-secondary); }
+  .btn-row button { flex: 1; padding: 10px; font-size: 14px; border-radius: 8px; cursor: pointer; border: 1px solid #ddd; background: #fff; color: #1a1a1a; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .btn-row button:hover { background: #f5f5f0; }
   .btn-start { border-color: #378ADD !important; color: #185FA5 !important; font-weight: 500; }
-  .btn-reset { color: var(--color-text-secondary) !important; }
-  .rounds-dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin: 0.75rem 0; }
-  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-border-secondary); border: 0.5px solid var(--color-border-secondary); }
+  .btn-reset { color: #888 !important; }
+  .rounds-dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin: 0.75rem 0; min-height: 16px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: #ddd; border: 1px solid #ccc; }
   .dot.done-dot { background: #378ADD; border-color: #185FA5; }
   .dot.active-dot { background: #E24B4A; border-color: #A32D2D; }
   .dot.break-dot { background: #1D9E75; border-color: #0F6E56; }
 </style>
-
+</head>
+<body>
 <div class="wrap">
-  <h2 class="sr-only">ตัวนับถอยหลังพร้อมรอบซ้ำและระยะพัก</h2>
+  <h1>⏱ Loopdown</h1>
 
   <div class="input-row">
     <div class="input-group">
@@ -61,19 +72,14 @@
   </div>
 
   <div class="btn-row">
-    <button class="btn-start" id="btn-main" onclick="handleMain()"><i class="ti ti-player-play" aria-hidden="true"></i> เริ่ม</button>
-    <button class="btn-reset" onclick="handleReset()"><i class="ti ti-refresh" aria-hidden="true"></i> รีเซ็ต</button>
+    <button class="btn-start" id="btn-main" onclick="handleMain()"><i class="ti ti-player-play"></i> เริ่ม</button>
+    <button class="btn-reset" onclick="handleReset()"><i class="ti ti-refresh"></i> รีเซ็ต</button>
   </div>
 </div>
 
 <script>
-  let timer = null;
-  let state = 'idle';
-  let currentRound = 0;
-  let totalRounds = 0;
-  let phase = 'work';
-  let remaining = 0;
-  let phaseDuration = 0;
+  let timer = null, state = 'idle', currentRound = 0, totalRounds = 0;
+  let phase = 'work', remaining = 0, phaseDuration = 0;
 
   const bigNum = document.getElementById('big-num');
   const phaseLabel = document.getElementById('phase-label');
@@ -85,18 +91,15 @@
   const dotsContainer = document.getElementById('dots-container');
 
   function fmt(s) {
-    const m = Math.floor(s / 60);
-    const sec = s % 60;
-    if (m > 0) return m + ':' + String(sec).padStart(2,'0');
-    return String(sec);
+    const m = Math.floor(s / 60), sec = s % 60;
+    return m > 0 ? m + ':' + String(sec).padStart(2,'0') : String(sec);
   }
 
   function buildDots(n) {
     dotsContainer.innerHTML = '';
     for (let i = 1; i <= n; i++) {
       const d = document.createElement('div');
-      d.className = 'dot';
-      d.id = 'dot-' + i;
+      d.className = 'dot'; d.id = 'dot-' + i;
       dotsContainer.appendChild(d);
     }
   }
@@ -107,9 +110,7 @@
       if (!d) continue;
       d.className = 'dot';
       if (i < currentRound) d.classList.add('done-dot');
-      else if (i === currentRound) {
-        d.classList.add(phase === 'break' ? 'break-dot' : 'active-dot');
-      }
+      else if (i === currentRound) d.classList.add(phase === 'break' ? 'break-dot' : 'active-dot');
     }
   }
 
@@ -117,7 +118,6 @@
     bigNum.textContent = fmt(remaining);
     bigNum.className = 'big-number';
     progressBar.className = 'progress-bar';
-
     if (phase === 'work') {
       phaseLabel.textContent = '💪 ทำงาน — รอบที่ ' + currentRound;
       curPhase.textContent = 'ทำงาน';
@@ -127,7 +127,6 @@
       bigNum.classList.add('break-color');
       progressBar.classList.add('break-bar');
     }
-
     curRound.textContent = currentRound;
     totalRoundsEl.textContent = totalRounds;
     const pct = phaseDuration > 0 ? Math.round(((phaseDuration - remaining) / phaseDuration) * 100) : 0;
@@ -136,94 +135,62 @@
   }
 
   function tick() {
-    if (remaining > 0) {
-      remaining--;
-      updateDisplay();
-    } else {
-      if (phase === 'work') {
-        const breakTime = parseInt(document.getElementById('inp-break').value) || 0;
-        if (currentRound < totalRounds && breakTime > 0) {
-          phase = 'break';
-          phaseDuration = breakTime;
-          remaining = breakTime;
-          updateDisplay();
-        } else {
-          nextRound();
-        }
-      } else {
-        nextRound();
-      }
-    }
+    if (remaining > 0) { remaining--; updateDisplay(); return; }
+    if (phase === 'work') {
+      const breakTime = parseInt(document.getElementById('inp-break').value) || 0;
+      if (currentRound < totalRounds && breakTime > 0) {
+        phase = 'break'; phaseDuration = breakTime; remaining = breakTime; updateDisplay();
+      } else { nextRound(); }
+    } else { nextRound(); }
   }
 
   function nextRound() {
     currentRound++;
     if (currentRound > totalRounds) {
-      clearInterval(timer);
-      timer = null;
-      state = 'done';
-      bigNum.textContent = '✓';
-      bigNum.className = 'big-number done-color';
-      phaseLabel.textContent = '🎉 เสร็จแล้ว!';
-      curPhase.textContent = 'สำเร็จ';
-      progressBar.style.width = '100%';
-      progressBar.className = 'progress-bar';
-      btnMain.innerHTML = '<i class="ti ti-player-play" aria-hidden="true"></i> เริ่มใหม่';
+      clearInterval(timer); timer = null; state = 'done';
+      bigNum.textContent = '✓'; bigNum.className = 'big-number done-color';
+      phaseLabel.textContent = '🎉 เสร็จแล้ว!'; curPhase.textContent = 'สำเร็จ';
+      progressBar.style.width = '100%'; progressBar.className = 'progress-bar';
+      btnMain.innerHTML = '<i class="ti ti-player-play"></i> เริ่มใหม่';
       for (let i = 1; i <= totalRounds; i++) {
         const d = document.getElementById('dot-' + i);
-        if (d) { d.className = 'dot done-dot'; }
+        if (d) d.className = 'dot done-dot';
       }
       return;
     }
     phase = 'work';
     const dur = parseInt(document.getElementById('inp-duration').value) || 25;
-    phaseDuration = dur;
-    remaining = dur;
-    updateDisplay();
+    phaseDuration = dur; remaining = dur; updateDisplay();
   }
 
   function handleMain() {
     if (state === 'idle' || state === 'done') {
       totalRounds = parseInt(document.getElementById('inp-rounds').value) || 4;
       const dur = parseInt(document.getElementById('inp-duration').value) || 25;
-      currentRound = 1;
-      phase = 'work';
-      phaseDuration = dur;
-      remaining = dur;
-      state = 'running';
-      buildDots(totalRounds);
-      updateDisplay();
-      btnMain.innerHTML = '<i class="ti ti-player-pause" aria-hidden="true"></i> หยุดชั่วคราว';
+      currentRound = 1; phase = 'work'; phaseDuration = dur; remaining = dur; state = 'running';
+      buildDots(totalRounds); updateDisplay();
+      btnMain.innerHTML = '<i class="ti ti-player-pause"></i> หยุดชั่วคราว';
       timer = setInterval(tick, 1000);
     } else if (state === 'running') {
-      clearInterval(timer);
-      timer = null;
-      state = 'paused';
-      btnMain.innerHTML = '<i class="ti ti-player-play" aria-hidden="true"></i> ต่อ';
+      clearInterval(timer); timer = null; state = 'paused';
+      btnMain.innerHTML = '<i class="ti ti-player-play"></i> ต่อ';
     } else if (state === 'paused') {
       state = 'running';
-      btnMain.innerHTML = '<i class="ti ti-player-pause" aria-hidden="true"></i> หยุดชั่วคราว';
+      btnMain.innerHTML = '<i class="ti ti-player-pause"></i> หยุดชั่วคราว';
       timer = setInterval(tick, 1000);
     }
   }
 
   function handleReset() {
-    clearInterval(timer);
-    timer = null;
-    state = 'idle';
-    currentRound = 0;
-    phase = 'work';
-    remaining = 0;
-    phaseDuration = 0;
-    bigNum.textContent = '—';
-    bigNum.className = 'big-number';
-    phaseLabel.textContent = 'รอเริ่ม';
-    curRound.textContent = '-';
-    curPhase.textContent = '-';
-    totalRoundsEl.textContent = '-';
-    progressBar.style.width = '0%';
-    progressBar.className = 'progress-bar';
-    btnMain.innerHTML = '<i class="ti ti-player-play" aria-hidden="true"></i> เริ่ม';
+    clearInterval(timer); timer = null; state = 'idle';
+    currentRound = 0; phase = 'work'; remaining = 0; phaseDuration = 0;
+    bigNum.textContent = '—'; bigNum.className = 'big-number';
+    phaseLabel.textContent = 'รอเริ่ม'; curRound.textContent = '-';
+    curPhase.textContent = '-'; totalRoundsEl.textContent = '-';
+    progressBar.style.width = '0%'; progressBar.className = 'progress-bar';
+    btnMain.innerHTML = '<i class="ti ti-player-play"></i> เริ่ม';
     dotsContainer.innerHTML = '';
   }
 </script>
+</body>
+</html>
